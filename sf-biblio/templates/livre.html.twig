@@ -1,0 +1,17 @@
+{% extends "base.html.twig" %}
+
+{% block main %}
+    <section>
+            <article>
+                <div class="img">
+                    <img src="{{ book.image }}" alt="">
+                </div>
+                <div class="containt">
+                    <h2>{{ book.title }}</h2>
+                    <h3>{{ book.author }}</h3>
+                    <h3>{{ book.publishedAt|date("m/d/Y") }}</h3>
+                </div>
+            </article>
+    </section>
+
+{% endblock %}

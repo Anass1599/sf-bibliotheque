@@ -1,0 +1,21 @@
+{% extends "base.html.twig" %}
+
+{% block main %}
+    <section>
+        {% for book in books %}
+            <article>
+                <div class="img">
+                    <a href="{{ path('livre', {'id' : book.id}) }}">
+                    <img src="{{ book.image }}" alt="">
+                    </a>
+                </div>
+                <div class="containt">
+                    <h2>{{ book.title }}</h2>
+                    <h3>{{ book.author }}</h3>
+                    <h3>{{ book.publishedAt|date("m/d/Y") }}</h3>
+                </div>
+            </article>
+        {% endfor %}
+    </section>
+
+{% endblock %}

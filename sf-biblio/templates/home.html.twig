@@ -4,38 +4,25 @@
 
 {% block main %}
     <section>
-        <article>
-            <div class="img">
-                <img src="{{ book.image }}" alt="">
-            </div>
-            <div class="containt">
-                <h2>{{ book.title }}</h2>
-                <h3>{{ book.author }}</h3>
-                <h3>{{ book.publishedAt|date("m/d/Y") }}</h3>
-            </div>
-        </article>
-
-        <article>
-            <div class="img">
-                <img src="{{ book.image }}" alt="">
-            </div>
-            <div class="containt">
-                <h2>{{ book.title }}</h2>
-                <h3>{{ book.author }}</h3>
-                <h3>{{ book.publishedAt|date("m/d/Y") }}</h3>
-            </div>
-        </article>
-
-        <article>
-            <div class="img">
-                <img src="{{ book.image }}" alt="">
-            </div>
-            <div class="containt">
-                <h2>{{ book.title }}</h2>
-                <h3>{{ book.author }}</h3>
-                <h3>{{ book.publishedAt|date("m/d/Y") }}</h3>
-            </div>
-        </article>
+        {# avec la methode path je recupere les variables dens mon tableau apartir de mon homeContraller. #}
+            {% for tab in tabs %}
+                <article>
+                    <div class="img">
+                        <a href="{{ path('livre', {'id' : tab.id}) }}">
+                            <img src="{{ tab.image }}" alt="">
+                        </a>
+                    </div>
+                    <div class="containt">
+                        <h2>{{ tab.title }}</h2>
+                        <h3>{{ tab.author }}</h3>
+                        <h3>{{ tab.publishedAt|date("m/d/Y") }}</h3>
+                    </div>
+                </article>
+            {% endfor %}
     </section>
+    {# avec la methode path je cree un url article plus l'id de l'article recuperer dans l'url. #}
+    <a class="btn" href="{{ path("livres") }}">VOIR + </a>
+
+
 
 {% endblock %}
