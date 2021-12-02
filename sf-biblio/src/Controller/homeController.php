@@ -207,4 +207,13 @@ class homeController extends AbstractController
         return $this->render("livre.html.twig", ['book' => $books[$id]]);
     }
 
+    /**
+     * @Route("/contact", name="contact")
+     */
+
+    public function contact()
+    {
+        return $this->render("contact.html.twig");
+    }
+
 }
