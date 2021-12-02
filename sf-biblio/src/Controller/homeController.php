@@ -60,17 +60,25 @@ class homeController extends AbstractController
                 "publishedAt" => new \DateTime('NOW'),
                 "image" => "https://images2.medimops.eu/product/ccc076/M01784700924-large.jpg",
                 "id" => 5
+            ],
+            6 => [
+                "title" => "Intuitio",
+                "author" => "Laurent Gounelle",
+                "publishedAt" => new \DateTime('NOW'),
+                "image" => "https://calmann-levy.fr/sites/default/files/images/livres/couv/9782702182932-001-T.jpeg",
+                "id" => 6
             ]
-        ];
 
-        $tabs = array_slice($books, 2);
+        ];
+        //je utilise la méthode array_slice pour extrait une portion de mon tableau dans un autre tableau.
+        $tabs = array_slice($books, -3);
 
         // je veux utiliser un fichier HTML en tant que réponse
         // HTTP
         // pour ça j'appelle la méthode render (issue de l'AbstractController)
         // et je lui passe en premier parametre le nom / le chemin du fichier
         // twig (html) situé dans le dossier template
-        //et aussi ma variable livre.
+        //et aussi mon tableau tabs.
         return $this->render("home.html.twig", ['tabs' => $tabs]);
     }
 
@@ -116,6 +124,13 @@ class homeController extends AbstractController
                 "publishedAt" => new \DateTime('NOW'),
                 "image" => "https://images2.medimops.eu/product/ccc076/M01784700924-large.jpg",
                 "id" => 5
+            ],
+            6 => [
+                "title" => "Intuitio",
+                "author" => "Laurent Gounelle",
+                "publishedAt" => new \DateTime('NOW'),
+                "image" => "https://calmann-levy.fr/sites/default/files/images/livres/couv/9782702182932-001-T.jpeg",
+                "id" => 6
             ]
         ];
 
@@ -173,6 +188,13 @@ class homeController extends AbstractController
                 "publishedAt" => new \DateTime('NOW'),
                 "image" => "https://images2.medimops.eu/product/ccc076/M01784700924-large.jpg",
                 "id" => 5
+            ],
+            6 => [
+                "title" => "Intuitio",
+                "author" => "Laurent Gounelle",
+                "publishedAt" => new \DateTime('NOW'),
+                "image" => "https://calmann-levy.fr/sites/default/files/images/livres/couv/9782702182932-001-T.jpeg",
+                "id" => 6
             ]
         ];
 

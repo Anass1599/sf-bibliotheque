@@ -1,19 +1,23 @@
+{# je utilise l'héritage de twig pour
+restituer le contenu du bloc parent (base.html.twig #}
 {% extends "base.html.twig" %}
 
-{% block title %}{% endblock %}
+{# je utilise l'héritage de twig (block) pour
+integre le contenu dans mon bloc parent (base.html.twig #}
+{% block title %}{{ parent()}}Accueil{% endblock %}
 
 {% block main %}
     <section>
         {# avec la methode path je recupere les variables dens mon tableau apartir de mon homeContraller. #}
             {% for tab in tabs %}
                 <article>
+                    <h2>{{ tab.title }}</h2>
                     <div class="img">
                         <a href="{{ path('livre', {'id' : tab.id}) }}">
                             <img src="{{ tab.image }}" alt="">
                         </a>
                     </div>
                     <div class="containt">
-                        <h2>{{ tab.title }}</h2>
                         <h3>{{ tab.author }}</h3>
                         <h3>{{ tab.publishedAt|date("m/d/Y") }}</h3>
                     </div>

@@ -1,16 +1,18 @@
 {% extends "base.html.twig" %}
 
+{% block title %}{{ parent() }}Listes Des Livres{% endblock %}
+
 {% block main %}
     <section>
         {% for book in books %}
             <article>
+                <h2>{{ book.title }}</h2>
                 <div class="img">
                     <a href="{{ path('livre', {'id' : book.id}) }}">
                     <img src="{{ book.image }}" alt="">
                     </a>
                 </div>
                 <div class="containt">
-                    <h2>{{ book.title }}</h2>
                     <h3>{{ book.author }}</h3>
                     <h3>{{ book.publishedAt|date("m/d/Y") }}</h3>
                 </div>
