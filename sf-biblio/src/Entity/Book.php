@@ -1,11 +1,13 @@
 <?php
 
+
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\BookRepository;
 
 /**
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass=BookRepository::class)
  */
 //je cree une class article(php) que doctrine transforme en écriture SQL pour cree ma table.
 class Book
