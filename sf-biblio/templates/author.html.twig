@@ -1,0 +1,14 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Listes Des autours{% endblock %}
+
+{% block main %}
+    <section>
+            <article>
+                <h2><a href="">{{ author.firtName}}</a></h2>
+                <h3>{{ author.lastName }}</h3>
+                <h3>{{ author.deathDate|date("m/d/Y") }}</h3>
+            </article>
+    </section>
+
+{% endblock %}
