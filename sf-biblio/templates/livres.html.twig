@@ -4,18 +4,12 @@
 
 {% block main %}
     <section>
-        {% for book in books %}
+        {% for book in livres %}
             <article>
-                <h2>{{ book.title }}</h2>
-                <div class="img">
-                    <a href="{{ path('livre', {'id' : book.id}) }}">
-                    <img src="{{ book.image }}" alt="">
-                    </a>
-                </div>
-                <div class="containt">
-                    <h3>{{ book.author }}</h3>
-                    <h3>{{ book.publishedAt|date("m/d/Y") }}</h3>
-                </div>
+                <h2><a href="{{ path('livre',{'id' : book.id}) }}">{{ book.title }}</a></h2>
+                <h3>{{ book.author }}</h3>
+                <h3>Nombre de pages : {{ book.nbPages }}</h3>
+                <h3>{{ book.publishedAt|date("m/d/Y") }}</h3>
             </article>
         {% endfor %}
     </section>

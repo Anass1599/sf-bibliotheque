@@ -11,16 +11,10 @@ integre le contenu dans mon bloc parent (base.html.twig #}
         {# avec la methode path je recupere les variables dens mon tableau apartir de mon homeContraller. #}
             {% for tab in tabs %}
                 <article>
-                    <h2>{{ tab.title }}</h2>
-                    <div class="img">
-                        <a href="{{ path('livre', {'id' : tab.id}) }}">
-                            <img src="{{ tab.image }}" alt="">
-                        </a>
-                    </div>
-                    <div class="containt">
-                        <h3>{{ tab.author }}</h3>
-                        <h3>{{ tab.publishedAt|date("m/d/Y") }}</h3>
-                    </div>
+                    <h2><a href="{{ path('livre', {'id' : tab.id})}}">{{ tab.title }}</a></h2>
+                    <h3>{{ tab.author }}</h3>
+                    <h3>Nombre de pages : {{ tab.nbPages }}</h3>
+                    <h3>{{ tab.publishedAt|date("m/d/Y") }}</h3>
                 </article>
             {% endfor %}
     </section>
