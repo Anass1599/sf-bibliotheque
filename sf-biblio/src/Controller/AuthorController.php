@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Author;
 use App\Repository\AuthorRepository;
+use App\Repository\BookRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -70,6 +71,26 @@ class AuthorController extends AbstractController
         $entityManager->flush();
 
         return $this->render("author_create.html.twig", ['author' => $author]);
+
+    }
+
+    /**
+     * @Route("/author/update/{id}", name="author_update")
+     */
+    //je crée une fonction pour modifier les info d'un author.
+    public function updateAuthor($id, AuthorRepository $authorRepository,EntityManagerInterface $entityManager)
+    {
+        // j'utilise la méthode find de la classe AuthorRepository
+        // pour récupérer un auteur de la table author avec $id recupere de l'url.
+        $author = $authorRepository->find($id);
+        //avec la methode setFirtName je modifier le contenu.
+        $author->setFirtName("anass");
+        //puis J'enregisttre l'instance de la classe author (l'entité) en BDD avec les methode
+        // de la EntityManagerInterface.
+        $entityManager->persist($author);
+        $entityManager->flush();
+
+        return $this->render("author_update.html.twig");
 
     }
 

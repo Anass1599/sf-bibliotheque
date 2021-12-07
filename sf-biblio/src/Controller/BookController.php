@@ -88,4 +88,24 @@ class BookController extends AbstractController
         return $this->render("livre_create.html.twig", ['book' => $book]);
 
     }
+
+    /**
+     * @Route("/livre/update/{id}", name="livre_update")
+     */
+    //je crée une fonction pour modifier les info d'un livre.
+    public function updateLivre($id, BookRepository $bookRepository,EntityManagerInterface $entityManager)
+    {
+        // j'utilise la méthode find de la classe BookRepository
+        // pour récupérer un livre de la table book avec $id recupere de l'url.
+        $book = $bookRepository->find($id);
+        //avec la methode set Title je modifier le contenu.
+        $book->setTitle("Win 3");
+        //puis J'enregisttre l'instance de la classe Book (l'entité) en BDD avec les methode
+        // de la EntityManagerInterface.
+        $entityManager->persist($book);
+        $entityManager->flush();
+
+        return $this->render("livre_update.html.twig");
+
+    }
 }
