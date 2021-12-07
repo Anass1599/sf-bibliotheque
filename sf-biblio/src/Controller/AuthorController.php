@@ -4,13 +4,14 @@ namespace App\Controller;
 
 use App\Entity\Author;
 use App\Repository\AuthorRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 
-class authorController extends AbstractController
+class AuthorController extends AbstractController
 {
 
     /**
@@ -55,7 +56,7 @@ class authorController extends AbstractController
      * @Route("author/create" , name="author_create")
      */
     //je crées une fonction pour enregistrer un nouveau auteur.
-    public function createAuthor()
+    public function createAuthor(EntityManagerInterface $entityManager)
     {
 
         //je instancier un objet de class Author
@@ -64,7 +65,12 @@ class authorController extends AbstractController
         $author = new Author();
         $author->setFirtName('Françoise');
         $author->setLastName('BOURDIN');
-        dump($author); die;
+
+        $entityManager->persist($author);
+        $entityManager->flush();
+
+        return $this->render("author_create.html.twig");
+
     }
 
 }
