@@ -7,7 +7,9 @@
             <article>
                 <h2><a href="">{{ author.firtName}}</a></h2>
                 <h3>{{ author.lastName }}</h3>
-                <h3>{{ author.deathDate|date("m/d/Y") }}</h3>
+                {% if (author.deathDate is not null) %}
+                    <h3>{{ author.deathDate|date("m/d/Y") }}</h3>
+                {% endif %}
             </article>
     </section>
 

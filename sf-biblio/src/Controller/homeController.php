@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Book;
 use App\Repository\AuthorRepository;
 use App\Repository\BookRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -42,8 +43,7 @@ class homeController extends AbstractController
     }
 
     /**
-     *
-     * @Route("/livres", name="livres")
+     *@Route("/livres", name="livres")
      */
     // pour instancier la classe BookRepository
     // j'utilise l'autowire de Symfony
@@ -73,7 +73,7 @@ class homeController extends AbstractController
      * est la page d'accueil.
      * Ma route va appeler la méthode home, car l'annotation
      * est placée au dessus de la méthode
-     * @Route("/livre/{id}", name="livre")
+     * @Route("/livre/{id}", name="livre", requirements={"id"="\d+"})
      */
     public function livre($id,BookRepository $bookRepository)
     {
@@ -86,6 +86,25 @@ class homeController extends AbstractController
         // twig (html) situé dans le dossier template
         //et aussi ma variable livre.
         return $this->render("livre.html.twig", ['book' => $livre]);
+    }
+
+    /**
+     * @Route("/livre/create", name="livre_create")
+     */
+    //je crées une fonction pour enregistrer un nouveau livre.
+    public function createLivre()
+    {
+        //je instancier un objet de class book
+        //puis je t'utilise les methode setTitle.. pour passe les informatins
+        // et enregistrer l'instance de la classe Book (l'entité) en BDD
+        $livre = new Book();
+        $livre->setTitle("L'Instant présent");
+        $livre->setAuthor("Guillaume Musso");
+        $livre->setNbPages("448");
+        $livre->setPublishedAt(new \DateTime('2017-05-05'));
+
+        dump($livre); die;
+
     }
 
     /**

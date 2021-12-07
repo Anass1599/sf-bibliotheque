@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Author;
 use App\Repository\AuthorRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -32,7 +33,7 @@ class authorController extends AbstractController
     }
 
     /**
-     * @Route("/author/{id}", name="author")
+     * @Route("/author/{id}", name="author", requirements={"id"="\d+"})
      */
     public function author($id, AuthorRepository $authorRepository)
     {
@@ -48,6 +49,22 @@ class authorController extends AbstractController
         // twig (html) situé dans le dossier template
         //et aussi ma variable author.
         return $this->render('author.html.twig', ['author' => $author]);
+    }
+
+    /**
+     * @Route("author/create" , name="author_create")
+     */
+    //je crées une fonction pour enregistrer un nouveau auteur.
+    public function createAuthor()
+    {
+
+        //je instancier un objet de class Author
+        //puis je t'utilise les methode setTitle... pour passe les informatins
+        // et enregistrer l'instance de la classe Book (l'entité) en BDD
+        $author = new Author();
+        $author->setFirtName('Françoise');
+        $author->setLastName('BOURDIN');
+        dump($author); die;
     }
 
 }
