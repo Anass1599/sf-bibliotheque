@@ -8,6 +8,11 @@
     <section>
         <article>
             <h2>Félicitation votre auteur est crée</h2>
+            <h2>{{ author.firtName }}</h2>
+            <h3>{{ author.lastName }}</h3>
+            {% if author.deathDate %}
+                <h3>{{ author.deathDate|date("m/d/Y") }}</h3>
+            {% endif %}
         </article>
     </section>
 {% endblock %}

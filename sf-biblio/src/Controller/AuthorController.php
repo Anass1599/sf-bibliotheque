@@ -69,7 +69,7 @@ class AuthorController extends AbstractController
         $entityManager->persist($author);
         $entityManager->flush();
 
-        return $this->render("author_create.html.twig");
+        return $this->render("author_create.html.twig", ['author' => $author]);
 
     }
 

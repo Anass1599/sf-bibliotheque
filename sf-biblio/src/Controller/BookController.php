@@ -70,21 +70,22 @@ class BookController extends AbstractController
         //je instancier un objet de class book
         //puis je t'utilise les methode setTitle.. pour passe les informatins
         // et enregistrer l'instance de la classe Book (l'entité) en BDD
-        $livre = new Book();
-        $livre->setTitle("L'Instant présent");
-        $livre->setAuthor("Guillaume Musso");
-        $livre->setNbPages("448");
-        $livre->setPublishedAt(new \DateTime('2017-05-05'));
+        $book = new Book();
+        $book->setTitle("Je reviens te chercher");
+        $book->setAuthor("Guillaume Musso");
+        $book->setNbPages("448");
+        $book->setPublishedAt(new \DateTime('2017-07-05'));
 
         // une fois l'entité créée, j'utilise la classe EntityManager
         // je demande à Symfony de l'instancier pour moi (grâce au système
         // d'autowire)
         // cette classe me permet de persister mon entité (de préparer sa sauvegarde
         // en bdd), puis d'effectuer l'enregistrement (génère et éxecute une requête SQL)
-        $entityManager->persist($livre);
+        $entityManager->persist($book);
         $entityManager->flush();
 
-        return $this->render("livre_create.html.twig");
+
+        return $this->render("livre_create.html.twig", ['book' => $book]);
 
     }
 }

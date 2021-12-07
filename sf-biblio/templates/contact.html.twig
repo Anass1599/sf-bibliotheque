@@ -1,0 +1,33 @@
+{# je utilise l'héritage de twig pour
+restituer le contenu du bloc parent (base.html.twig #}
+{% extends "base.html.twig" %}
+
+{# je utilise l'héritage de twig (block) pour
+integre le contenu dans mon bloc parent (base.html.twig #}
+{% block title %}{{ parent()}}Contact{% endblock %}
+
+{% block stylesheet %}<link rel="stylesheet" href="{{ asset('assets/css/stylefrom.css') }}">{% endblock %}
+
+{% block main %}
+
+    <form class="form-style-9">
+        <h2>CONTACT-NOUS</h2>
+        <ul>
+            <li>
+                <input type="text" class="Name" placeholder="Name" />
+                <input type="email" class="Email" placeholder="Email" />
+            </li>
+            <li>
+                <input type="text"  placeholder="Phone" />
+                <input type="text"  placeholder="Subject" />
+            </li>
+            <li>
+                <textarea name="field5" class="Message" placeholder="Message"></textarea>
+            </li>
+            <li>
+                <input type="submit" class="btn" value="VALIDER" />
+            </li>
+        </ul>
+    </form>
+
+{% endblock %}
