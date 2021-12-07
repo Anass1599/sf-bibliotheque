@@ -60,7 +60,7 @@ class authorController extends AbstractController
 
         //je instancier un objet de class Author
         //puis je t'utilise les methode setTitle... pour passe les informatins
-        // et enregistrer l'instance de la classe Book (l'entité) en BDD
+        // et enregistrer l'instance de la classe Author (l'entité) en BDD
         $author = new Author();
         $author->setFirtName('Françoise');
         $author->setLastName('BOURDIN');
