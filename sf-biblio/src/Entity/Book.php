@@ -21,14 +21,10 @@ class Book
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=150)
+     * @ORM\Column(type="string", length=255)
      */
     private $title;
 
-    /**
-     * @ORM\Column(type="string")
-     */
-    private $author;
 
     /**
      * @ORM\Column(type="integer")
@@ -39,6 +35,11 @@ class Book
      * @ORM\Column(type="date")
      */
     private $publishedAt;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Author::class)
+     */
+    private $author;
 
     public function getId(): ?int
     {
@@ -53,18 +54,6 @@ class Book
     public function setTitle(string $title): self
     {
         $this->title = $title;
-
-        return $this;
-    }
-
-    public function getAuthor(): ?string
-    {
-        return $this->author;
-    }
-
-    public function setAuthor(string $author): self
-    {
-        $this->author = $author;
 
         return $this;
     }
@@ -89,6 +78,18 @@ class Book
     public function setPublishedAt(\DateTimeInterface $publishedAt): self
     {
         $this->publishedAt = $publishedAt;
+
+        return $this;
+    }
+
+    public function getAuthor(): ?Author
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(?Author $author): self
+    {
+        $this->author = $author;
 
         return $this;
     }
