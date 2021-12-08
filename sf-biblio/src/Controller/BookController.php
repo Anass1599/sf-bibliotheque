@@ -108,4 +108,22 @@ class BookController extends AbstractController
         return $this->render("livre_update.html.twig");
 
     }
+
+    /**
+     * @Route("/livre/delete/{id}", name="livre_delete")
+     */
+    public function deleteLivre($id, BookRepository $bookRepository, EntityManagerInterface $entityManager)
+    {
+        // j'utilise la méthode find de la classe BookRepository
+        // pour récupérer un livre de la table book avec $id recupere de l'url.
+        $book = $bookRepository->find($id);
+
+        //je utilise les methode remove() et flush pour préparer et executer
+        //la suppression de l'instance de la classe Book (l'entité) en BDD.
+        $entityManager->remove($book);
+        $entityManager->flush();
+
+        return $this->render("livre_delete.html.twig", ["book" => $book]);
+
+    }
 }

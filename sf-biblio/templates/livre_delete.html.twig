@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+
+{% endblock %}
+
+{% block main %}
+    <section>
+        <article>
+            <h2>Félicitation votre livre est supprimer</h2>
+            <h2>{{ book.title }}</h2>
+            <h3>{{ book.author }}</h3>
+            <h3>Nombre de pages : {{ book.nbPages }}</h3>
+            <h3>{{ book.publishedAt|date("m/d/Y") }}</h3>
+        </article>
+    </section>
+{% endblock %}
+

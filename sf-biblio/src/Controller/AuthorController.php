@@ -84,13 +84,31 @@ class AuthorController extends AbstractController
         // pour récupérer un auteur de la table author avec $id recupere de l'url.
         $author = $authorRepository->find($id);
         //avec la methode setFirtName je modifier le contenu.
-        $author->setFirtName("anass");
+        $author->setFirtName("julie");
         //puis J'enregisttre l'instance de la classe author (l'entité) en BDD avec les methode
         // de la EntityManagerInterface.
         $entityManager->persist($author);
         $entityManager->flush();
 
-        return $this->render("author_update.html.twig");
+        return $this->render("author_update.html.twig", ['author' => $author]);
+
+    }
+
+    /**
+     * @Route("/author/delete/{id}", name="author_delete")
+     */
+    public function deleteAuthor($id,AuthorRepository $authorRepository, EntityManagerInterface $entityManager)
+    {
+        // j'utilise la méthode find de la classe AuthorRepository
+        // pour récupérer un auteur de la table author avec $id recupere de l'url.
+        $author = $authorRepository->find($id);
+
+        //je utilise les methode remove() et flush pour préparer et executer
+        //la suppression de l'instance de la classe Author (l'entité) en BDD.
+        $entityManager->remove($author);
+        $entityManager->flush();
+
+        return $this->render("author_delete.html.twig", ['author' => $author]);
 
     }
 
