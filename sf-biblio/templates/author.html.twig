@@ -10,6 +10,10 @@
                 {% if (author.deathDate is not null) %}
                     <h3>{{ author.deathDate|date("m/d/Y") }}</h3>
                 {% endif %}
+                {% for book in author.books %}
+                    <h3>{{ book.title }}</h3>
+                    <h3>{{ book.publishedAt|date("m/d/y") }}</h3>
+                {% endfor %}
             </article>
     </section>
 
