@@ -64,8 +64,8 @@ class AuthorController extends AbstractController
         //puis je t'utilise les methode setTitle... pour passe les informatins
         // et enregistrer l'instance de la classe Author (l'entité) en BDD
         $author = new Author();
-        $author->setFirtName('Françoise');
-        $author->setLastName('BOURDIN');
+        $author->setFirtName('Harlan');
+        $author->setLastName('Coben');
 
         $entityManager->persist($author);
         $entityManager->flush();

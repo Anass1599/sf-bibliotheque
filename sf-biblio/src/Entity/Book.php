@@ -41,6 +41,11 @@ class Book
      */
     private $author;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Gener::class)
+     */
+    private $gener;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -90,6 +95,18 @@ class Book
     public function setAuthor(?Author $author): self
     {
         $this->author = $author;
+
+        return $this;
+    }
+
+    public function getGener(): ?Gener
+    {
+        return $this->gener;
+    }
+
+    public function setGener(?Gener $gener): self
+    {
+        $this->gener = $gener;
 
         return $this;
     }

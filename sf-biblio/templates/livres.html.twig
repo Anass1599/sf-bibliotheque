@@ -7,7 +7,9 @@
         {% for book in livres %}
             <article>
                 <h2><a href="{{ path('livre',{'id' : book.id}) }}">{{ book.title }}</a></h2>
-                <h3>{{ book.author }}</h3>
+                {% if book.author %}
+                    <h3>{{ book.author.firtName  }} {{ book.author.lastName }}</h3>
+                {% endif %}
                 <h3>Nombre de pages : {{ book.nbPages }}</h3>
                 <h3>{{ book.publishedAt|date("m/d/Y") }}</h3>
             </article>
