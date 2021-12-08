@@ -37,14 +37,15 @@ class Book
     private $publishedAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Author::class)
+     * @ORM\ManyToOne(targetEntity=Author::class, inversedBy="books")
      */
     private $author;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Gener::class)
+     * @ORM\ManyToOne(targetEntity=Gener::class, inversedBy="books")
      */
     private $gener;
+
 
     public function getId(): ?int
     {
@@ -110,5 +111,4 @@ class Book
 
         return $this;
     }
-
 }
