@@ -110,19 +110,27 @@ class AdminBookController extends AbstractController
      * @Route("/admin/livre/update/{id}", name="admin_livre_update")
      */
     //je crée une fonction pour modifier les info d'un livre.
-    public function updateLivre($id, BookRepository $bookRepository,EntityManagerInterface $entityManager)
+    public function updateLivre($id,Request $request, BookRepository $bookRepository,EntityManagerInterface $entityManager)
     {
         // j'utilise la méthode find de la classe BookRepository
         // pour récupérer un livre de la table book avec $id recupere de l'url.
         $book = $bookRepository->find($id);
-        //avec la methode set Title je modifier le contenu.
-        $book->setTitle("Win 3");
-        //puis J'enregisttre l'instance de la classe Book (l'entité) en BDD avec les methode
-        // de la EntityManagerInterface.
-        $entityManager->persist($book);
-        $entityManager->flush();
 
-        return $this->render("admin/livre_update.html.twig");
+        $form = $this->createForm(BookType::class, $book);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid())
+        {
+            //puis J'enregisttre l'instance de la classe Book (l'entité) en BDD avec les methode
+            // de la EntityManagerInterface.
+            $entityManager->persist($book);
+            $entityManager->flush();
+
+        }
+
+
+        return $this->render("admin/livre_update.html.twig", ['form' => $form->createView()]);
 
     }
 
