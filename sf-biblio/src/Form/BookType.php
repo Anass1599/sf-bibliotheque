@@ -3,7 +3,9 @@
 namespace App\Form;
 
 use App\Entity\Book;
+use phpDocumentor\Reflection\Type;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -15,6 +17,8 @@ class BookType extends AbstractType
             ->add('title')
             ->add('nbPages')
             ->add('publishedAt')
+            // Ajouter un input submit
+            ->add('VALIDER', SubmitType::class)
             //->add('author')
             //->add('gener')
         ;

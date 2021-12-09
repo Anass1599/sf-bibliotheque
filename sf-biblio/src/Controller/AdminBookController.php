@@ -66,7 +66,11 @@ class AdminBookController extends AbstractController
      * @Route("/admin/livre/create", name="admin_livre_create")
      */
     //je crées une fonction pour enregistrer un nouveau livre.
-    public function createLivre()
+    //je demande à symfony de instancier un objet de la classe Request,
+    // car elle va Récupére et contenir les données POST du form.
+    //je demande à symfony de instancier un objet de la classe EntityManagerInterface,
+    // pour enregistrer mon instance book dans ma BDD(symfony se charge de créer la requete sql a envoyer vers MySQL).
+    public function createLivre(Request $request, EntityManagerInterface $entityManager)
     {
         //je instancier un objet de class book
         $book = new Book();
@@ -77,6 +81,25 @@ class AdminBookController extends AbstractController
         // puis en deuxième parametre  l'instance book qui va contenir les données.
         //symfony fait la connexion entre le formulaire et l'intance book.
         $form = $this->createForm(BookType::class, $book);
+
+
+        // Asssocier le formulaire à la classe Request (le formulaire
+        // lui est associé à l'instance de l'entité Book)
+        //donc je recupere les info dans mon instance request et je les transfert dans mon instance form.
+        $form->handleRequest($request);
+
+        // Vérifier que le formulaire a été envoyé
+        // le isValid empeche que des données invalides par rapports aux types de colonnes
+        // soient insérées + prévient les injections SQL
+        if ($form->isSubmitted() && $form->isValid())
+        {
+            //puis J'enregisttre l'instance de la classe Book (l'entité) en BDD avec les methode
+            // de la class EntityManagerInterface.
+            $entityManager->persist($book);
+            $entityManager->flush();
+        }
+
+
 
 
         return $this->render("admin/livre_create.html.twig", ['form' => $form->createView()]);
