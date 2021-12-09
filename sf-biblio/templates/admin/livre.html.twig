@@ -15,6 +15,7 @@
                 {% for book in book.gener %}
                     <h3>{{ book.title }}</h3>
                 {% endfor %}
+                <a class="btn2" href="{{ path("admin_livre_delete", {'id' : book.id}) }}">Supprimer</a>
             </article>
     </section>
 

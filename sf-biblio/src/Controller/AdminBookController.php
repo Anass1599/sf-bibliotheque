@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Book;
+use App\Form\BookType;
 use App\Repository\AuthorRepository;
 use App\Repository\BookRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -12,11 +13,11 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 
-class BookController extends AbstractController
+class AdminBookController extends AbstractController
 {
 
     /**
-     *@Route("/livres", name="livres")
+     *@Route("/admin/livres", name="admin_livres")
      */
     // pour instancier la classe BookRepository
     // j'utilise l'autowire de Symfony
@@ -37,7 +38,7 @@ class BookController extends AbstractController
         // et je lui passe en premier parametre le nom / le chemin du fichier
         // twig (html) situé dans le dossier template
         //et aussi ma variable livre.
-        return $this->render("livres.html.twig", ['livres' => $livres]);
+        return $this->render("admin/livres.html.twig", ['livres' => $livres]);
     }
 
     /**
@@ -46,7 +47,7 @@ class BookController extends AbstractController
      * est la page d'accueil.
      * Ma route va appeler la méthode home, car l'annotation
      * est placée au dessus de la méthode
-     * @Route("/livre/{id}", name="livre", requirements={"id"="\d+"})
+     * @Route("/admin/livre/{id}", name="admin_livre", requirements={"id"="\d+"})
      */
     public function livre($id,BookRepository $bookRepository)
     {
@@ -58,39 +59,32 @@ class BookController extends AbstractController
         // et je lui passe en premier parametre le nom / le chemin du fichier
         // twig (html) situé dans le dossier template
         //et aussi ma variable livre.
-        return $this->render("livre.html.twig", ['book' => $livre]);
+        return $this->render("admin/livre.html.twig", ['book' => $livre]);
     }
 
     /**
-     * @Route("/livre/create", name="livre_create")
+     * @Route("/admin/livre/create", name="admin_livre_create")
      */
     //je crées une fonction pour enregistrer un nouveau livre.
-    public function createLivre(EntityManagerInterface $entityManager)
+    public function createLivre()
     {
         //je instancier un objet de class book
-        //puis je t'utilise les methode setTitle.. pour passe les informatins
-        // et enregistrer l'instance de la classe Book (l'entité) en BDD
         $book = new Book();
-        $book->setTitle("Je reviens te chercher");
-        $book->setAuthor("Guillaume Musso");
-        $book->setNbPages("448");
-        $book->setPublishedAt(new \DateTime('2017-07-05'));
 
-        // une fois l'entité créée, j'utilise la classe EntityManager
-        // je demande à Symfony de l'instancier pour moi (grâce au système
-        // d'autowire)
-        // cette classe me permet de persister mon entité (de préparer sa sauvegarde
-        // en bdd), puis d'effectuer l'enregistrement (génère et éxecute une requête SQL)
-        $entityManager->persist($book);
-        $entityManager->flush();
+        //Ensuite je utilise la méthode createForm() de la classe
+        // AbstractController dont notre contrôleur hérite pour créer le formulaire.
+        // En premier paramètre, j'envie le chemin de la class BookTyps sur la quel le formulaire est basé,
+        // puis en deuxième parametre  l'instance book qui va contenir les données.
+        //symfony fait la connexion entre le formulaire et l'intance book.
+        $form = $this->createForm(BookType::class, $book);
 
 
-        return $this->render("livre_create.html.twig", ['book' => $book]);
+        return $this->render("admin/livre_create.html.twig", ['form' => $form->createView()]);
 
     }
 
     /**
-     * @Route("/livre/update/{id}", name="livre_update")
+     * @Route("/admin/livre/update/{id}", name="admin_livre_update")
      */
     //je crée une fonction pour modifier les info d'un livre.
     public function updateLivre($id, BookRepository $bookRepository,EntityManagerInterface $entityManager)
@@ -105,12 +99,12 @@ class BookController extends AbstractController
         $entityManager->persist($book);
         $entityManager->flush();
 
-        return $this->render("livre_update.html.twig");
+        return $this->render("admin/livre_update.html.twig");
 
     }
 
     /**
-     * @Route("/livre/delete/{id}", name="livre_delete")
+     * @Route("/admin/livre/delete/{id}", name="admin_livre_delete")
      */
     public function deleteLivre($id, BookRepository $bookRepository, EntityManagerInterface $entityManager)
     {
@@ -123,7 +117,7 @@ class BookController extends AbstractController
         $entityManager->remove($book);
         $entityManager->flush();
 
-        return $this->redirectToRoute("livres");
+        return $this->redirectToRoute("admin_livres");
 
     }
 }

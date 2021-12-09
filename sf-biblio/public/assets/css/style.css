@@ -88,9 +88,9 @@ img {
     object-fit: contain;
 }
 
-.btn {background-image: linear-gradient(to right, #314755 0%, #26a0da  51%, #314755  100%)}
-.btn{
-    margin: 10px;
+.btn1 {background-image: linear-gradient(to right, #314755 0%, #26a0da  51%, #314755  100%)}
+.btn1{
+    margin: 2rem auto;
     padding: 15px 45px;
     text-align: center;
     text-decoration: none;
@@ -102,14 +102,37 @@ img {
     border-radius: 10px;
     display: block;
     width: 100px;
-    margin: 2rem auto;
 }
 
-.btn:hover {
+.btn1:hover {
     background-position: right center;
     color: #fff;
     text-decoration: none;
 }
+
+
+.btn2 {background-image: linear-gradient(to right, #000000 0%, #434343  51%, #000000  100%)}
+.btn2 {
+    margin: 10px auto;
+    padding: 10px 10px;
+    width: 100px;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: white;
+    box-shadow: 0 0 20px #eee;
+    border-radius: 10px;
+    display: block;
+}
+
+.btn2:hover {
+    background-position: right center; /* change the direction of the change here */
+    color: #fff;
+    text-decoration: none;
+}
+
 
 @media (max-width: 1000px) {
 

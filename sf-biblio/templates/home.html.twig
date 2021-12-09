@@ -11,7 +11,7 @@ integre le contenu dans mon bloc parent (base.html.twig #}
         {# avec la methode path je recupere les variables dens mon tableau apartir de mon homeContraller. #}
             {% for book in books %}
                 <article>
-                    <h2><a href="{{ path('livre', {'id' : book.id})}}">{{ book.title }}</a></h2>
+                    <h2><a href="{{ path('admin_livre', {'id' : book.id})}}">{{ book.title }}</a></h2>
                     {% if book.author %}
                         <h3>{{ book.author.firtName  }}</h3>
                     {% endif %}
@@ -21,7 +21,7 @@ integre le contenu dans mon bloc parent (base.html.twig #}
             {% endfor %}
     </section>
         {# avec la methode path je cree un url article plus l'id de l'article recuperer dans l'url. #}
-        <a class="btn" href="{{ path("livres") }}">VOIR + </a>
+        <a class="btn1" href="{{ path("admin_livres") }}">VOIR + </a>
     <section>
         {% for author in authors %}
                 <article>
@@ -34,11 +34,11 @@ integre le contenu dans mon bloc parent (base.html.twig #}
         {% endfor %}
     </section>
     {# avec la methode path je cree un url auteur plus l'id de l'auteur recuperer dans l'url. #}
-    <a class="btn" href="{{ path("authors") }}">VOIR + </a>
+    <a class="btn1" href="{{ path("authors") }}">VOIR + </a>
 
     <section>
         {% for gener in geners %}
-            <a class="btn" href="{{ path('gener', {'id' : gener.id})}}">{{ gener.title }}</a>
+            <a class="btn1" href="{{ path('gener', {'id' : gener.id})}}">{{ gener.title }}</a>
         {% endfor %}
     </section>
 
