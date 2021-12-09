@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Book;
 use App\Repository\AuthorRepository;
 use App\Repository\BookRepository;
+use App\Repository\GenerRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -27,19 +28,20 @@ class HomeController extends AbstractController
      * est placée au dessus de la méthode
      * @Route("/home", name="home")
      */
-    public function home(BookRepository $bookRepository, AuthorRepository $authorRepository)
+    public function home(BookRepository $bookRepository, AuthorRepository $authorRepository, GenerRepository $generRepository)
     {
 
         //je utilise la méthode findBy() pour extrait une portion de mon tableau dans un autre tableau.
         $books = $bookRepository->findBy(array(),array('id'=>'DESC'),3,0);
         $authors = $authorRepository->findBy(array(),array('id'=>'DESC'),3,0);
+        $geners = $generRepository->findAll();
         // je veux utiliser un fichier HTML en tant que réponse
         // HTTP
         // pour ça j'appelle la méthode render (issue de l'AbstractController)
         // et je lui passe en premier parametre le nom / le chemin du fichier
         // twig (html) situé dans le dossier template
         //et aussi mon tableau tabs.
-        return $this->render("home.html.twig", ['books' => $books,'authors'=>$authors]);
+        return $this->render("home.html.twig", ['books' => $books,'authors'=>$authors, 'geners' => $geners]);
     }
 
     /**

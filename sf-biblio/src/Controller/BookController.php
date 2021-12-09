@@ -123,7 +123,7 @@ class BookController extends AbstractController
         $entityManager->remove($book);
         $entityManager->flush();
 
-        return $this->render("livre_delete.html.twig", ["book" => $book]);
+        return $this->redirectToRoute("livres");
 
     }
 }

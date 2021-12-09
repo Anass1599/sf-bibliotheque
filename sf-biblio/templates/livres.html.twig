@@ -12,6 +12,7 @@
                 {% endif %}
                 <h3>Nombre de pages : {{ book.nbPages }}</h3>
                 <h3>{{ book.publishedAt|date("m/d/Y") }}</h3>
+                <a class="btn" href="{{ path("livre_delete", {'id' : book.id}) }}">Supprimer</a>
             </article>
         {% endfor %}
     </section>

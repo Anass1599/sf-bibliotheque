@@ -12,6 +12,9 @@
                 <h3>Nombre de pages : {{ book.nbPages }}</h3>
                 <h3>{{ book.publishedAt|date("m/d/Y") }}</h3>
                 <h3>{{ book.gener.title }}</h3>
+                {% for book in book.gener %}
+                    <h3>{{ book.title }}</h3>
+                {% endfor %}
             </article>
     </section>
 
