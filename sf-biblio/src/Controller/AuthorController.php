@@ -16,7 +16,7 @@ class AuthorController extends AbstractController
 {
 
     /**
-     * @Route("/authors", name="authors")
+     * @Route("/admin/authors", name="admin_authors")
      */
     public function authors(AuthorRepository $authorRepository)
     {
@@ -31,11 +31,11 @@ class AuthorController extends AbstractController
         // et je lui passe en premier parametre le nom / le chemin du fichier
         // twig (html) situé dans le dossier template
         //et aussi ma variable authors.
-        return $this->render('authors.html.twig', ['authors' => $authors]);
+        return $this->render('admin/authors.html.twig', ['authors' => $authors]);
     }
 
     /**
-     * @Route("/author/{id}", name="author", requirements={"id"="\d+"})
+     * @Route("/admin/author/{id}", name="admin_author", requirements={"id"="\d+"})
      */
     public function author($id, AuthorRepository $authorRepository)
     {
@@ -50,11 +50,11 @@ class AuthorController extends AbstractController
         // et je lui passe en premier parametre le nom / le chemin du fichier
         // twig (html) situé dans le dossier template
         //et aussi ma variable author.
-        return $this->render('author.html.twig', ['author' => $author]);
+        return $this->render('admin/author.html.twig', ['author' => $author]);
     }
 
     /**
-     * @Route("author/create" , name="author_create")
+     * @Route("/admin/author/create" , name="admin_author_create")
      */
     //je crées une fonction pour enregistrer un nouveau auteur.
     public function createAuthor(EntityManagerInterface $entityManager)
@@ -70,12 +70,12 @@ class AuthorController extends AbstractController
         $entityManager->persist($author);
         $entityManager->flush();
 
-        return $this->render("author_create.html.twig", ['author' => $author]);
+        return $this->render("admin/author_create.html.twig", ['author' => $author]);
 
     }
 
     /**
-     * @Route("/author/update/{id}", name="author_update")
+     * @Route("/admin/author/update/{id}", name="admin_author_update")
      */
     //je crée une fonction pour modifier les info d'un author.
     public function updateAuthor($id, AuthorRepository $authorRepository,EntityManagerInterface $entityManager)
@@ -90,12 +90,12 @@ class AuthorController extends AbstractController
         $entityManager->persist($author);
         $entityManager->flush();
 
-        return $this->render("author_update.html.twig", ['author' => $author]);
+        return $this->render("admin/author_update.html.twig", ['author' => $author]);
 
     }
 
     /**
-     * @Route("/author/delete/{id}", name="author_delete")
+     * @Route("/admin/author/delete/{id}", name="admin_author_delete")
      */
     public function deleteAuthor($id,AuthorRepository $authorRepository, EntityManagerInterface $entityManager)
     {
@@ -108,7 +108,7 @@ class AuthorController extends AbstractController
         $entityManager->remove($author);
         $entityManager->flush();
 
-        return $this->render("author_delete.html.twig", ['author' => $author]);
+        return $this->render("admin/author_delete.html.twig", ['author' => $author]);
 
     }
 

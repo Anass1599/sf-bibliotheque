@@ -13,6 +13,7 @@
                 <h3>Nombre de pages : {{ book.nbPages }}</h3>
                 <h3>{{ book.publishedAt|date("m/d/Y") }}</h3>
                 <a class="btn2" href="{{ path("admin_livre_delete", {'id' : book.id}) }}">Supprimer</a>
+                <a class="btn2" href="{{ path("admin_livre_update", {'id' : book.id}) }}">MODIFIER</a>
             </article>
         {% endfor %}
     </section>

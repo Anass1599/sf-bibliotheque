@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends '/base.html.twig' %}
 
 {% block title %}
 
@@ -7,7 +7,7 @@
 {% block main %}
     <section>
         <article>
-            <h2>Félicitation votre auteur est supprimer</h2>
+            <h2>Félicitation votre auteur est crée</h2>
             <h2>{{ author.firtName }}</h2>
             <h3>{{ author.lastName }}</h3>
             {% if author.deathDate %}
@@ -16,3 +16,4 @@
         </article>
     </section>
 {% endblock %}
+
