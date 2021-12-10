@@ -38,12 +38,13 @@ class Book
 
     /**
      * @ORM\ManyToOne(targetEntity=Author::class, inversedBy="books")
+     * @ORM\JoinColumn(onDelete="CASCADE")
      */
     private $author;
 
     /**
      * @ORM\ManyToOne(targetEntity=Gener::class, inversedBy="books")
-     * 
+     *
      */
     private $gener;
 
