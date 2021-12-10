@@ -1,15 +1,45 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}
+{% block title %}{% endblock %}
 
-{% endblock %}
+{% block stylesheet %}<link rel="stylesheet" href="{{ asset('assets/css/stylefrom.css') }}">{% endblock %}
 
 {% block main %}
     <section>
         <article>
-            {# je utilise la fonction Twig form() pour creer et afficher le formulaire  #}
 
-            {{ form(form) }}
+
+            {{ form_start(form) }}
+
+                <div class="form-style-9">
+                    <h2>AJOUTER UN LIVRE</h2>
+
+                    {{ form_widget(form.title, {'attr': {'placeholder': 'Tapez le Titre du livre'}}) }}
+
+                    {{ form_widget(form.nbPages, {'attr': {'placeholder': 'Tapez le nombre des pages'}}) }}
+
+                    <div class="form">
+                        {{ form_label(form.publishedAt, 'Date de parution') }}
+                        {{ form_widget(form.publishedAt)}}
+                    </div>
+
+                    <div class="form">
+                        {{ form_label(form.author, 'Auteur') }}
+                        {{ form_widget(form.author,{'attr': {'value': 'Tapez'}})}}
+                    </div>
+
+                    <div class="form">
+                        {{ form_label(form.gener, 'Gener') }}
+                        {{ form_widget(form.gener)}}
+                    </div>
+
+
+                    {{ form_widget(form.VALIDER, {'attr': {'class': 'btn'}}) }}
+
+                </div>
+
+            {{ form_end(form) }}
+
         </article>
     </section>
 {% endblock %}
