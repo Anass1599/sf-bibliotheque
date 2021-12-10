@@ -3,6 +3,8 @@
 {% block title %}{{ parent() }}Listes Des Livres{% endblock %}
 
 {% block main %}
+
+    <a class="btn1" href="{{ path("admin_livre_create") }}">AJOUTER</a>
     <section>
         {% for book in livres %}
             <article>

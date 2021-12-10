@@ -43,6 +43,7 @@ class Book
 
     /**
      * @ORM\ManyToOne(targetEntity=Gener::class, inversedBy="books")
+     * 
      */
     private $gener;
 

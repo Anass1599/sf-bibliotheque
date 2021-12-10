@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Author;
+use App\Form\AuthorType;
 use App\Repository\AuthorRepository;
 use App\Repository\BookRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -57,40 +58,64 @@ class AuthorController extends AbstractController
      * @Route("/admin/author/create" , name="admin_author_create")
      */
     //je crées une fonction pour enregistrer un nouveau auteur.
-    public function createAuthor(EntityManagerInterface $entityManager)
+    public function createAuthor(EntityManagerInterface $entityManager, Request $request)
     {
 
-        //je instancier un objet de class Author
-        //puis je t'utilise les methode setTitle... pour passe les informatins
-        // et enregistrer l'instance de la classe Author (l'entité) en BDD
+        //je instancier un objet de class author
+        //puis je cree mon formulaire avec la methode createForm
+        //symfony fait la connexion entre le formulaire et l'intance author.
+        //je recupere les info dans mon instance request et je les transfert dans mon instance form.
         $author = new Author();
-        $author->setFirtName('Harlan');
-        $author->setLastName('Coben');
+        $form = $this->createForm(AuthorType::class, $author);
+        $form->handleRequest($request);
 
-        $entityManager->persist($author);
-        $entityManager->flush();
 
-        return $this->render("admin/author_create.html.twig", ['author' => $author]);
+        // Vérifier que le formulaire a été envoyé
+        // le isValid empeche que des données invalides par rapports aux types de colonnes
+        // soient insérées + prévient les injections SQL
+        if($form->isSubmitted() && $form->isValid())
+        {
+            //puis J'enregisttre l'instance de la classe Book (l'entité) en BDD avec les methode
+            // de la class EntityManagerInterface.
+            $entityManager->persist($author);
+            $entityManager->flush();
+        }
+
+        return $this->render("admin/author_create.html.twig", ['form' => $form->createView()]);
 
     }
+
 
     /**
      * @Route("/admin/author/update/{id}", name="admin_author_update")
      */
     //je crée une fonction pour modifier les info d'un author.
-    public function updateAuthor($id, AuthorRepository $authorRepository,EntityManagerInterface $entityManager)
+    public function updateAuthor($id, AuthorRepository $authorRepository, Request $request, EntityManagerInterface $entityManager)
     {
-        // j'utilise la méthode find de la classe AuthorRepository
+        // j'utilise la méthode find de la classe BookRepository
         // pour récupérer un auteur de la table author avec $id recupere de l'url.
+        //puis je cree mon formulaire avec la methode createForm
+        //symfony fait la connexion entre le formulaire et l'intance author.
+        //je recupere les info dans mon instance request et je les transfert dans mon instance form.
         $author = $authorRepository->find($id);
-        //avec la methode setFirtName je modifier le contenu.
-        $author->setFirtName("julie");
-        //puis J'enregisttre l'instance de la classe author (l'entité) en BDD avec les methode
-        // de la EntityManagerInterface.
-        $entityManager->persist($author);
-        $entityManager->flush();
+        $form = $this->createForm(AuthorType::class, $author);
+        $form->handleRequest($request);
 
-        return $this->render("admin/author_update.html.twig", ['author' => $author]);
+
+        // Vérifier que le formulaire a été envoyé
+        // le isValid empeche que des données invalides par rapports aux types de colonnes
+        // soient insérées + prévient les injections SQL
+        if($form->isSubmitted() && $form->isValid())
+        {
+            //puis J'enregisttre l'instance de la classe Book (l'entité) en BDD avec les methode
+            // de la class EntityManagerInterface.
+            $entityManager->persist($author);
+            $entityManager->flush();
+        }
+
+
+
+        return $this->render("admin/author_update.html.twig", ['form' => $form->createView()]);
 
     }
 
@@ -108,7 +133,7 @@ class AuthorController extends AbstractController
         $entityManager->remove($author);
         $entityManager->flush();
 
-        return $this->render("admin/author_delete.html.twig", ['author' => $author]);
+        return $this->redirectToRoute("admin_authors");
 
     }
 

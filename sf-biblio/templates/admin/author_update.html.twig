@@ -7,12 +7,7 @@
 {% block main %}
     <section>
         <article>
-            <h2>Félicitation votre auteur à été modifié</h2>
-            <h2>{{ author.firtName }}</h2>
-            <h3>{{ author.lastName }}</h3>
-            {% if author.deathDate %}
-                <h3>{{ author.deathDate|date("m/d/Y") }}</h3>
-            {% endif %}
+            {{ form(form) }}
         </article>
     </section>
 {% endblock %}

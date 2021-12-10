@@ -3,6 +3,9 @@
 {% block title %}Listes Des autours{% endblock %}
 
 {% block main %}
+
+
+    <a class="btn1" href="{{ path("admin_author_create") }}">AJOUTER</a>
     <section>
         {% for author in authors  %}
             <article>
@@ -11,8 +14,11 @@
                 {% if (author.deathDate is not null) %}
                     <h3>{{ author.deathDate|date("m/d/Y") }}</h3>
                 {% endif %}
+                <a class="btn2" href="{{ path("admin_author_delete", {'id' : author.id}) }}">Supprimer</a>
+                <a class="btn2" href="{{ path("admin_author_update", {'id' : author.id}) }}">MODIFIER</a>
             </article>
         {% endfor %}
     </section>
+
 
 {% endblock %}

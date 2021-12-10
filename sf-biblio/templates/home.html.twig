@@ -38,8 +38,12 @@ integre le contenu dans mon bloc parent (base.html.twig #}
                 </article>
         {% endfor %}
     </section>
-    {# avec la methode path je cree un url auteur plus l'id de l'auteur recuperer dans l'url. #}
-    <a class="btn1" href="{{ path("admin_authors") }}">VOIR + </a>
+
+    <section>
+        {# avec la methode path je cree un url auteur plus l'id de l'auteur recuperer dans l'url. #}
+        <a class="btn1" href="{{ path("admin_authors") }}">VOIR + </a>
+        <a class="btn1" href="{{ path("admin_author_create") }}">AJOUTER</a>
+    </section>
 
     <section>
         {% for gener in geners %}
