@@ -8,6 +8,7 @@ use App\Entity\Gener;
 use phpDocumentor\Reflection\Type;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -20,7 +21,9 @@ class BookType extends AbstractType
         $builder
             ->add('title')
             ->add('nbPages')
-            ->add('publishedAt')
+            ->add('publishedAt', DateType::class, [
+                'widget' => 'single_text',
+            ])
             //avec add je cree un input qui recupere l'entity Author
                 //avec choice_label je cible l'information a afficher
                 //ici avec une fonction je concatène firtName et lastName.

@@ -19,6 +19,33 @@ class BookRepository extends ServiceEntityRepository
         parent::__construct($registry, Book::class);
     }
 
+    //je cree une fonction qui me permet de chercher dans ma BDD.
+    public function searchByTitle($word)
+    {
+
+        // j'utilise la méthode createQueryBuilder
+        // provenant de la classe parent pour instancer un objet
+        // et je définis un alias pour la table book
+        $queryBuilder = $this->createQueryBuilder('b');
+
+        // je demande à Doctrine de créer une requête SQL
+        // qui fait une requête SELECT sur la table book
+        $query = $queryBuilder->select('b')
+        // à condition que le titre du book
+        // contiennent le contenu de $word (à un endroit ou à un autre, grâce à LIKE %xxxx%)
+                              ->where('b.title LIKE :word')
+        // avec la methode setParameter je controle le contenu de la variable
+                              ->setParameter('word', '%'.$word.'%')
+        // puis je recuper ma requete SQL
+                              ->getQuery();
+
+        // je récupère les résultats de la requête SQL
+        // et je les retourne
+        return $query->getResult();
+
+
+    }
+
     // /**
     //  * @return Book[] Returns an array of Book objects
     //  */

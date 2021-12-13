@@ -151,4 +151,21 @@ class AdminBookController extends AbstractController
         return $this->redirectToRoute("admin_livres");
 
     }
+
+    /**
+     * @Route("/admin/search", name="admin_search_books")
+     */
+    //je demande à symfony de instancier un objet de la classe Request, et la class BookRepository.
+    public function searchBook(BookRepository $bookRepository, Request $request)
+    {
+        // je récupère ce que tu l'utilisateur a recherché grâce à la classe Request
+        $search = $request->query->get('search');
+
+
+        // je fais ma requête en BDD grâce à la méthode que j'ai créée searchByTitle
+        $books = $bookRepository->searchByTitle($search);
+
+        return $this->render("admin/books_search.html.twig", ['books' => $books]);
+
+    }
 }

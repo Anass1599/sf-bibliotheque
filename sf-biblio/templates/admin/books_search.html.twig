@@ -1,0 +1,14 @@
+{% extends "base.html.twig" %}
+
+{% block title %}{% endblock %}
+
+{% block main %}
+    <section>
+        <article>
+            {% for book in books %}
+                <h3>{{ book.title }}</h3>
+            {% endfor %}
+        </article>
+    </section>
+
+{% endblock %}

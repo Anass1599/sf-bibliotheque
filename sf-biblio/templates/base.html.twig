@@ -21,6 +21,12 @@
             <li><a href="{{ path("admin_livres") }}">Livres</a></li>
             <li><a href="{{ path("admin_authors") }}">Auteurs</a></li>
             <li><a href="{{ path("contact") }}">Contact</a></li>
+            <li>
+                <form action="{{ path('admin_search_books') }}">
+                    <input type="text" name="search">
+                    <input type="submit">
+                </form>
+            </li>
         </ul>
     </nav>
 </header>
